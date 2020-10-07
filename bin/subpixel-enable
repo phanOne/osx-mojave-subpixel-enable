@@ -1,0 +1,14 @@
+#!/bin/sh
+# usage ./subpixel-enable <setting>
+#
+#
+fontSmoothingLevel=$1
+if [[ -z "${fontSmoothingLevel}" ]]; then
+    echo "Need font smoothing level from 0 - 3"
+    exit 1
+else 
+    defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+    defaults -currentHost write -globalDomain AppleFontSmoothing -int ${fontSmoothingLevel}
+    echo "AppleFontSmoothing: ${fontSmoothingLevel}"
+    echo "Please logoff and log back in for changes to take effect..."
+fi
